@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
    def basic_auth
    authenticate_or_request_with_http_basic do |username, token|
      user = User.find_by_email(username)
-     if user.auth_token == token
+     if user.api_token == token
        sign_in user
      end
    end
