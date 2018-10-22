@@ -13,6 +13,16 @@ class Api::V1::PinsController < ApplicationController
   end
 
   private
+
+
+    def restrict_access 
+      authenticate_or_request_with_http_token do |token, options|
+        ApiKey.exists?(access_token: token)
+      end 
+    end 
+
+
+
     def pin_params
       params.require(:pin).permit(:title, :image_url)
     end
